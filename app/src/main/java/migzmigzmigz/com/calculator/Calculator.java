@@ -55,16 +55,15 @@ public final class Calculator {
         mOutput.setText(toString());
     }
 
-    /**
-     * It is assumed that the given operator parameter is a valid operator
-     *
-     * @param operator
-     */
     public void onOperatorClick(String operator) {
-        shouldClear = false; // don't clear mExpression after this operation
-
         int indexOfLast = mExpression.size() - 1;
         String last = mExpression.get(indexOfLast);
+        
+        if ("Error".equals(last)) { // exit prematurely if error
+            return;
+        }
+
+        shouldClear = false; // don't clear mExpression after this operation
 
         if (isOperator(last)) {
             mExpression.remove(indexOfLast);
